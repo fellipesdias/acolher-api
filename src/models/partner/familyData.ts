@@ -5,8 +5,8 @@ export default interface FamilyData {
   isParentsAlive: boolean;
   receiveChildSupport: boolean;
   responsible: BasicData & { kinship: string };
-  hasCustody: boolean;
   numberOfFamilyMembers: number;
+  hasCustody: boolean;
 }
 
 interface BasicData {

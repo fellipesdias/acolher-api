@@ -24,7 +24,11 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "@types/mysql": "^2.15.19",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.95.14",
+    "mysql": "^2.18.1"
   },
   "compilerOptions": {
     "target": "es2017",
