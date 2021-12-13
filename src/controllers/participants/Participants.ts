@@ -2,42 +2,34 @@ import { participantes, PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 
 const prisma = new PrismaClient();
-export const ParticipantsController = {
+export const Participants = {
   create: async (req: Request, res: Response) => {
-    prisma.$connect();
     const participant = req.body as participantes;
     if (participant.nomeCompleto) {
       const createdParticipant = await prisma.participantes.create({
         data: participant,
       });
-      prisma.$disconnect();
       return res.json(createdParticipant).status(201);
     }
-    prisma.$disconnect();
     return res.status(400);
   },
   findAll: async (req: Request, res: Response) => {
-    prisma.$connect();
     const participantList = await prisma.participantes.findMany();
-
     return res.json(participantList);
   },
   find: async (req: Request, res: Response) => {
-    prisma.$connect();
     const { id } = req.params;
     const participant = await prisma.participantes.findUnique({
       where: {
         id: Number(id),
       },
     });
-    prisma.$disconnect();
     if (participant) {
       return res.json(participant);
     }
     return res.status(404).json({ message: "Participante não encontrado" });
   },
   update: async (req: Request, res: Response) => {
-    prisma.$connect();
     const { id } = req.params;
     if (!id) {
       return res.status(400).json({ message: "id é obrigatório" });
@@ -49,8 +41,6 @@ export const ParticipantsController = {
       },
       data: participantUpdated,
     });
-    prisma.$disconnect();
-
     if (participant) {
       return res.status(204);
     }
