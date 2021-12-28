@@ -1,7 +1,7 @@
 import { saude, PrismaClient } from "@prisma/client";
 import { Response, Request } from "express";
+import { prismaClient as prisma } from "../../server";
 
-const prisma = new PrismaClient();
 export const Health = {
   create: async (req: Request, res: Response) => {
     const health = req.body as saude;

@@ -1,30 +1,28 @@
-import { PrismaClient } from ".prisma/client";
 import { Request, Response } from "express";
+import { prismaClient as prisma } from "../server";
 
 export const AuthController = {
   login: async (req: Request, res: Response) => {
-    const prisma = new PrismaClient();
-
     const { username, password } = req.body;
+    if (username && password) {
+      const user = await prisma.usuarios.findFirst({
+        where: {
+          usuario: username,
+          senha: password,
+        },
+      });
+      prisma.$disconnect();
 
-    const user = await prisma.usuarios.findFirst({
-      where: {
-        usuario: username,
-        senha: password,
-      },
-    });
-    prisma.$disconnect();
-
-    if (user) {
-      return res.json(user);
-    } else {
-      return res.json({ message: "credenciais inválidas." });
+      if (user) {
+        return res.json(user);
+      } else {
+        return res.status(401).json({ message: "credenciais inválidas." });
+      }
     }
+    return res.status(400).json();
   },
 
   signup: async (req: Request, res: Response) => {
-    const prisma = new PrismaClient();
-
     const { username, password } = req.body;
     const user = await prisma.usuarios.findFirst({
       where: {

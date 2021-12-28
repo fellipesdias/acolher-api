@@ -1,4 +1,4 @@
-import express from "express";
+import express, { application, Request, Response } from "express";
 import bodyParser from "body-parser";
 import { AuthController } from "./controllers/AuthController";
 import { Participants } from "./controllers/participants/Participants";
@@ -7,20 +7,22 @@ import { FamilyData } from "./controllers/participants/FamilyData";
 import { FamilyMembers } from "./controllers/participants/FamilyMembers";
 import { Health } from "./controllers/participants/Health";
 import { SchoolData } from "./controllers/participants/SchoolData";
+import { PrismaClient } from "@prisma/client";
+import cors from "cors";
 
 const server = express();
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(express.json());
+server.use(cors());
 
 server.get("/", (req, res) => {
   res.send("The server is up");
 });
 
-server.post("/login", async (req, res) => {
-  const response = await AuthController.login(req, res);
-  return response.send();
+server.post("/login", (req: Request, res: Response) => {
+  return AuthController.login(req, res).then((response) => response.send());
 });
 
 server.post("/signup", async (req, res) => {
@@ -163,4 +165,5 @@ server.delete("/schoolData/:id", async (req, res) => {
   return response.send();
 });
 
+export const prismaClient = new PrismaClient();
 export default server;

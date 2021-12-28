@@ -1,7 +1,7 @@
-import { familiares, PrismaClient } from "@prisma/client";
+import { familiares } from "@prisma/client";
 import { Response, Request } from "express";
+import { prismaClient as prisma } from "../../server";
 
-const prisma = new PrismaClient();
 export const FamilyMembers = {
   create: async (req: Request, res: Response) => {
     const familyMembers = req.body as familiares;

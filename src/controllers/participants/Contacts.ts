@@ -1,8 +1,6 @@
-import { contatos, PrismaClient } from "@prisma/client";
+import { contatos } from "@prisma/client";
 import { Request, Response } from "express";
-
-const prisma = new PrismaClient();
-
+import { prismaClient as prisma } from "../../server";
 export const Contacts = {
   create: async (req: Request, res: Response) => {
     const contact = req.body as contatos[];

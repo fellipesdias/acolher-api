@@ -1,7 +1,7 @@
 import { participantes, PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
+import { prismaClient as prisma } from "../../server";
 
-const prisma = new PrismaClient();
 export const Participants = {
   create: async (req: Request, res: Response) => {
     const participant = req.body as participantes;

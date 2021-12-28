@@ -1,7 +1,7 @@
 import { endereco, PrismaClient } from "@prisma/client";
 import { Response, Request } from "express";
+import { prismaClient as prisma } from "../../server";
 
-const prisma = new PrismaClient();
 export const Address = {
   create: async (req: Request, res: Response) => {
     const address = req.body as endereco;

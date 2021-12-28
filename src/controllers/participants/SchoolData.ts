@@ -1,7 +1,7 @@
 import { PrismaClient, dadosEscolares } from "@prisma/client";
 import { Request, Response } from "express";
+import { prismaClient as prisma } from "../../server";
 
-const prisma = new PrismaClient();
 export const SchoolData = {
   create: async (req: Request, res: Response) => {
     const schoolData = req.body as dadosEscolares;
