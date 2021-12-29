@@ -5,6 +5,6 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-var server_1 = __importDefault(require("./dist/server"));
+var server_1 = __importDefault(require("./server"));
 server_1.default.listen(3000);
 //# sourceMappingURL=index.js.map
