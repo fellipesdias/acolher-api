@@ -3,12 +3,12 @@ import { prismaClient as prisma } from "../server";
 
 export const AuthController = {
   login: async (req: Request, res: Response) => {
-    const { username, password } = req.body;
-    if (username && password) {
+    const { usuario, senha } = req.body;
+    if (usuario && senha) {
       const user = await prisma.usuarios.findFirst({
         where: {
-          usuario: username,
-          senha: password,
+          usuario,
+          senha,
         },
       });
       prisma.$disconnect();
@@ -16,25 +16,25 @@ export const AuthController = {
       if (user) {
         return res.json(user);
       } else {
-        return res.status(401).json({ message: "credenciais inválidas." });
+        return res.status(401).json({ mensagem: "credenciais inválidas." });
       }
     }
     return res.status(400).json();
   },
 
   signup: async (req: Request, res: Response) => {
-    const { username, password } = req.body;
+    const { usuario, senha } = req.body;
     const user = await prisma.usuarios.findFirst({
       where: {
-        usuario: username,
+        usuario,
       },
     });
 
     if (!user) {
       const newUser = await prisma.usuarios.create({
         data: {
-          usuario: username,
-          senha: password,
+          usuario,
+          senha,
         },
       });
 
@@ -44,7 +44,7 @@ export const AuthController = {
 
     prisma.$disconnect();
     return res.json({
-      message: "Já existe um usuário cadastrado com esse username",
+      mensagem: "Já existe um usuário cadastrado com esse username",
     });
   },
 };

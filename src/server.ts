@@ -1,4 +1,4 @@
-import express, { application, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import { AuthController } from "./controllers/AuthController";
 import { Participants } from "./controllers/participants/Participants";
@@ -38,7 +38,7 @@ server.post("/participant", async (req, res) => {
 
 server.get("/participant", async (req, res) => {
   const response = await Participants.findAll(req, res);
-  return response.send();
+  return response;
 });
 
 server.get("/participant/:id", async (req, res) => {
@@ -46,7 +46,7 @@ server.get("/participant/:id", async (req, res) => {
   return response.send();
 });
 
-server.put("/participant/:id", async (req, res) => {
+server.put("/participant", async (req, res) => {
   const response = await Participants.update(req, res);
   return response.send();
 });
@@ -85,7 +85,7 @@ server.post("/familyData", async (req, res) => {
 });
 
 server.put("/familyData", async (req, res) => {
-  const response = await FamilyData.create(req, res);
+  const response = await FamilyData.update(req, res);
   return response.send();
 });
 
@@ -107,7 +107,7 @@ server.post("/familyMembers", async (req, res) => {
 });
 
 server.put("/familyMembers", async (req, res) => {
-  const response = await FamilyMembers.create(req, res);
+  const response = await FamilyMembers.update(req, res);
   return response.send();
 });
 
@@ -129,7 +129,7 @@ server.post("/health", async (req, res) => {
 });
 
 server.put("/health", async (req, res) => {
-  const response = await Health.create(req, res);
+  const response = await Health.update(req, res);
   return response.send();
 });
 
@@ -151,7 +151,7 @@ server.post("/schoolData", async (req, res) => {
 });
 
 server.put("/schoolData", async (req, res) => {
-  const response = await SchoolData.create(req, res);
+  const response = await SchoolData.update(req, res);
   return response.send();
 });
 

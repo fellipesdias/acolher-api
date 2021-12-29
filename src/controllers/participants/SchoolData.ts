@@ -1,4 +1,4 @@
-import { PrismaClient, dadosEscolares } from "@prisma/client";
+import { dadosEscolares } from "@prisma/client";
 import { Request, Response } from "express";
 import { prismaClient as prisma } from "../../server";
 
@@ -6,9 +6,10 @@ export const SchoolData = {
   create: async (req: Request, res: Response) => {
     const schoolData = req.body as dadosEscolares;
     if (schoolData.idParticipante) {
-      const createdSchoolData = await prisma.dadosEscolares.create({
-        data: schoolData,
-      });
+      const createdSchoolData: dadosEscolares =
+        await prisma.dadosEscolares.create({
+          data: schoolData,
+        });
       return res.json(createdSchoolData);
     }
     return res.status(400);

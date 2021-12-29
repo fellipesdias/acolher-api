@@ -15,7 +15,7 @@ export const Participants = {
   },
   findAll: async (req: Request, res: Response) => {
     const participantList = await prisma.participantes.findMany();
-    return res.json(participantList);
+    return res.status(200).json(participantList);
   },
   find: async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -27,17 +27,13 @@ export const Participants = {
     if (participant) {
       return res.json(participant);
     }
-    return res.status(404).json({ message: "Participante não encontrado" });
+    return res.status(404).json({ mensagem: "Participante não encontrado" });
   },
   update: async (req: Request, res: Response) => {
-    const { id } = req.params;
-    if (!id) {
-      return res.status(400).json({ message: "id é obrigatório" });
-    }
     const participantUpdated = req.body;
     const participant = await prisma.participantes.update({
       where: {
-        id: Number(id),
+        id: Number(participantUpdated.id),
       },
       data: participantUpdated,
     });
