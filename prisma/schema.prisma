@@ -106,6 +106,7 @@ model participantes {
   enfermidade          String?           @db.Text
   restricaoAlimentar   String?           @db.Text
   alergiaMedicamentosa String?           @db.Text
+  dtNascimento         DateTime?         @db.Date
   contatos             contatos[]
   dadosEscolares       dadosEscolares[]
   dadosFamiliares      dadosFamiliares[]

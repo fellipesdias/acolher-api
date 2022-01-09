@@ -4,6 +4,7 @@ import { prismaClient as prisma } from "../server";
 export const AuthController = {
   login: async (req: Request, res: Response) => {
     const { usuario, senha } = req.body;
+    console.log(req.body)
     if (usuario && senha) {
       const user = await prisma.usuarios.findFirst({
         where: {
@@ -24,6 +25,7 @@ export const AuthController = {
 
   signup: async (req: Request, res: Response) => {
     const { usuario, senha } = req.body;
+    console.log(req.body)
     const user = await prisma.usuarios.findFirst({
       where: {
         usuario,

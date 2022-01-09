@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import { AuthController } from "./controllers/AuthController";
 import { Participants } from "./controllers/participants/Participants";
+import { Address } from "./controllers/participants/Address";
 import { Contacts } from "./controllers/participants/Contacts";
 import { FamilyData } from "./controllers/participants/FamilyData";
 import { FamilyMembers } from "./controllers/participants/FamilyMembers";
@@ -25,9 +26,9 @@ server.post("/login", (req: Request, res: Response) => {
   return AuthController.login(req, res).then((response) => response.send());
 });
 
-server.post("/signup", async (req, res) => {
-  const response = await AuthController.signup(req, res);
-  return response.send();
+server.post("/signup", (req: Request, res: Response) => {
+  console.log('ALGUMA COISA' || req.body)  
+   return AuthController.signup(req, res).then((response) => response.send());
 });
 
 /**partner crud */
@@ -162,6 +163,28 @@ server.get("/schoolData/:idParticipant", async (req, res) => {
 
 server.delete("/schoolData/:id", async (req, res) => {
   const response = await SchoolData.delete(req, res);
+  return response.send();
+});
+
+/** Endereço **/
+server.post("/address", async (req, res) => {
+  console.log(req)
+  const response = await Address.create(req, res);
+  return response.send();
+});
+
+server.put("/address", async (req, res) => {
+  const response = await Address.update(req, res);
+  return response.send();
+});
+
+server.get("/address/:idParticipant", async (req, res) => {
+  const response = await Address.find(req, res);
+  return response.send();
+});
+
+server.delete("/address/:id", async (req, res) => {
+  const response = await Address.delete(req, res);
   return response.send();
 });
 

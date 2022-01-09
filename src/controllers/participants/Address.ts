@@ -5,6 +5,7 @@ import { prismaClient as prisma } from "../../server";
 export const Address = {
   create: async (req: Request, res: Response) => {
     const address = req.body as endereco;
+    console.log(address)
     const addressCreated = await prisma.endereco.create({
       data: address,
     });
@@ -13,9 +14,9 @@ export const Address = {
   },
   find: async (req: Request, res: Response) => {
     const id = req.params;
-    const address = await prisma.endereco.findUnique({
+    const address = await prisma.endereco.findMany({
       where: {
-        id: Number(id),
+       idParticipante:Number(id)
       },
     });
     if (address) {
