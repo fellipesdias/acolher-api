@@ -38,7 +38,7 @@ export const Participants = {
       data: participantUpdated,
     });
     if (participant) {
-      return res.status(204);
+      return res.json(participant);
     }
     return res.status(404).json({ message: "participante não encontrado" });
   },
