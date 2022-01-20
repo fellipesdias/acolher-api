@@ -10,9 +10,9 @@ datasource db {
 model contatos {
   id             Int           @id @default(autoincrement())
   idParticipante Int
-  TelefoneFixo   String?       @db.Char(1)
-  Celular        String?       @db.Char(1)
-  Email          String?       @db.Char(1)
+  TelefoneFixo   String?       @db.Char(20)
+  Celular        String?       @db.Char(20)
+  Email          String?       @db.Char(100)
   participantes  participantes @relation(fields: [idParticipante], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "contatos_ibfk_1")
 
   @@index([idParticipante], map: "idParticipante")
@@ -21,10 +21,10 @@ model contatos {
 model dadosEscolares {
   id             Int           @id @default(autoincrement())
   idParticipante Int
-  NomeEscola     String?       @db.Char(1)
-  Escolaridade   String?       @db.Char(1)
-  Turno          String?       @db.Char(1)
-  serie          String?       @db.VarChar(5)
+  NomeEscola     String?       @db.Char(100)
+  Escolaridade   String?       @db.Char(30)
+  Turno          String?       @db.Char(15)
+  serie          String?       @db.VarChar(10)
   participantes  participantes @relation(fields: [idParticipante], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "dadosEscolares_ibfk_1")
 
   @@index([idParticipante], map: "idParticipante")
@@ -33,14 +33,14 @@ model dadosEscolares {
 model dadosFamiliares {
   id                    Int           @id @default(autoincrement())
   idParticipante        Int
-  nomeMae               String?       @db.Char(1)
-  nomePai               String?       @db.Char(1)
+  nomeMae               String?       @db.Char(100)
+  nomePai               String?       @db.Char(100)
   paisDivorciados       Boolean?
   paisVivos             Boolean?
   recebePensao          Boolean?
-  responsavelLegal      String?       @db.Char(1)
-  parentescoResponsavel String?       @db.Char(1)
-  possuiRegistroGuarda  String?       @db.Char(1)
+  responsavelLegal      String?       @db.Char(100)
+  parentescoResponsavel String?       @db.Char(100)
+  possuiRegistroGuarda  String?       @db.Char(100)
   qtdFamiliares         Int?
   participantes         participantes @relation(fields: [idParticipante], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "dadosFamiliares_ibfk_1")
   familiares            familiares[]
@@ -51,13 +51,13 @@ model dadosFamiliares {
 model endereco {
   id             Int           @id @default(autoincrement())
   idParticipante Int
-  Logradouro     String?       @db.Char(1)
-  Numero         String?       @db.Char(1)
-  Complemento    String?       @db.Char(1)
-  CEP            String?       @db.Char(1)
-  Bairro         String?       @db.Char(1)
-  Estado         String?       @db.Char(1)
-  Cidade         String?       @db.Char(1)
+  Logradouro     String?       @db.Char(250)
+  Numero         String?       @db.Char(10)
+  Complemento    String?       @db.Char(150)
+  CEP            String?       @db.Char(15)
+  Bairro         String?       @db.Char(250)
+  Estado         String?       @db.Char(100)
+  Cidade         String?       @db.Char(150)
   participantes  participantes @relation(fields: [idParticipante], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "endereco_ibfk_1")
 
   @@index([idParticipante], map: "idParticipante")
@@ -67,8 +67,8 @@ model familiares {
   id                Int             @id @default(autoincrement())
   idDadosFamiliares Int
   idParticipante    Int
-  Nome              String?         @db.Char(1)
-  Parentesco        String?         @db.Char(1)
+  Nome              String?         @db.Char(250)
+  Parentesco        String?         @db.Char(100)
   dadosFamiliares   dadosFamiliares @relation(fields: [idDadosFamiliares], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "familiares_ibfk_2")
   participantes     participantes   @relation(fields: [idParticipante], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "familiares_ibfk_1")
 
@@ -77,42 +77,24 @@ model familiares {
 }
 
 model participantes {
-  id                   Int               @id @default(autoincrement())
-  nomeCompleto         String            @db.VarChar(100)
-  rg                   String?           @db.VarChar(20)
-  cpf                  String?           @db.VarChar(14)
-  telefone             String?           @db.VarChar(15)
-  celular              String?           @db.VarChar(15)
-  telefoneResponsavel  String?           @db.VarChar(15)
-  celularResponsavel   String?           @db.VarChar(15)
-  email                String?           @db.VarChar(50)
-  genero               String?           @db.Char(1)
-  federado             Boolean?
-  clube                String?           @db.VarChar(50)
-  modalidade           String?           @db.VarChar(50)
-  dataInicioFederado   DateTime?         @db.Date
-  logradouro           String?           @db.VarChar(100)
-  numeroEndereco       String?           @db.VarChar(5)
-  cep                  String?           @db.VarChar(10)
-  estado               String?           @db.VarChar(80)
-  cidade               String?           @db.VarChar(80)
-  complemento          String?           @db.VarChar(150)
-  escola               String?           @db.VarChar(255)
-  escolaridade         String?           @db.Char(1)
-  turno                String?           @db.Char(1)
-  serie                String?           @db.VarChar(10)
-  tipoSanguineo        String?           @db.Char(2)
-  alergias             String?           @db.Text
-  enfermidade          String?           @db.Text
-  restricaoAlimentar   String?           @db.Text
-  alergiaMedicamentosa String?           @db.Text
-  dtNascimento         DateTime?         @db.Date
-  contatos             contatos[]
-  dadosEscolares       dadosEscolares[]
-  dadosFamiliares      dadosFamiliares[]
-  endereco             endereco[]
-  familiares           familiares[]
-  saude                saude[]
+  id                  Int               @id @default(autoincrement())
+  nomeCompleto        String            @db.VarChar(100)
+  rg                  String?           @db.VarChar(20)
+  cpf                 String?           @db.VarChar(14)
+  telefoneResponsavel String?           @db.VarChar(15)
+  celularResponsavel  String?           @db.VarChar(15)
+  genero              String?           @db.Char(15)
+  federado            Boolean?
+  clube               String?           @db.VarChar(50)
+  modalidade          String?           @db.VarChar(50)
+  dataInicioFederado  DateTime?         @db.Date
+  dtNascimento        DateTime?         @db.Date
+  contatos            contatos[]
+  dadosEscolares      dadosEscolares[]
+  dadosFamiliares     dadosFamiliares[]
+  endereco            endereco[]
+  familiares          familiares[]
+  saude               saude[]
 }
 
 model saude {

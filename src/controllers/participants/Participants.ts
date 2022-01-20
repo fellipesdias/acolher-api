@@ -1,4 +1,4 @@
-import { participantes, PrismaClient } from "@prisma/client";
+import { participantes } from "@prisma/client";
 import { Request, Response } from "express";
 import { prismaClient as prisma } from "../../server";
 
@@ -30,12 +30,16 @@ export const Participants = {
     return res.status(404).json({ mensagem: "Participante não encontrado" });
   },
   update: async (req: Request, res: Response) => {
-    const participantUpdated = req.body;
+    const participantUpdated = req.body as participantes;
+
     const participant = await prisma.participantes.update({
       where: {
         id: Number(participantUpdated.id),
       },
-      data: participantUpdated,
+      data: {
+        ...participantUpdated,
+        dtNascimento: null,
+      },
     });
     if (participant) {
       return res.json(participant);

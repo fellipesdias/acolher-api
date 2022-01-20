@@ -1,36 +1,32 @@
-import { endereco, PrismaClient } from "@prisma/client";
+import { endereco } from "@prisma/client";
 import { Response, Request } from "express";
 import { prismaClient as prisma } from "../../server";
 
 export const Address = {
   create: async (req: Request, res: Response) => {
-    const address = req.body as endereco;
-    console.log("create: ", JSON.stringify(address));
-    if (!address.idParticipante) {
+    const data = req.body as endereco;
+    if (!data.idParticipante) {
       return res.status(400);
     }
-
     const addressCreated = await prisma.endereco.create({
-      data: address,
+      data,
     });
-
     return res.json(addressCreated);
   },
   find: async (req: Request, res: Response) => {
     const { idParticipant } = req.params;
-    const address = await prisma.endereco.findMany({
+    const addresses = await prisma.endereco.findMany({
       where: {
         idParticipante: Number(idParticipant),
       },
     });
-    if (address) {
-      return res.json(address);
+    if (addresses) {
+      return res.json(addresses);
     }
     return res.json({ message: "Nenhum endereço foi encontrado." });
   },
   update: async (req: Request, res: Response) => {
     const address = req.body as endereco;
-    console.log("update: ", JSON.stringify(address));
     await prisma.endereco.update({
       where: {
         id: address.id,

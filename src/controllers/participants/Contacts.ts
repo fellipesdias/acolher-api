@@ -23,18 +23,14 @@ export const Contacts = {
   },
   update: async (req: Request, res: Response) => {
     const contact = req.body as contatos;
-    const contactUpdated = prisma.contatos.update({
+    await prisma.contatos.update({
       where: {
         id: contact.id,
       },
-      data: {
-        Celular: contact.Celular,
-        Email: contact.Email,
-        TelefoneFixo: contact.TelefoneFixo,
-      },
+      data: contact,
     });
 
-    return res.json(contactUpdated);
+    return res.status(204);
   },
 
   delete: async (req: Request, res: Response) => {
