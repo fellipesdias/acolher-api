@@ -2,7 +2,7 @@
   "name": "acolher-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "babel src --out-dir dist --no-copy-ignored",
     "dev": "nodemon index.ts",

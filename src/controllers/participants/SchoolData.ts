@@ -15,7 +15,7 @@ export const SchoolData = {
     return res.status(400);
   },
   find: async (req: Request, res: Response) => {
-    const idParticipant = req.params;
+    const { idParticipant } = req.params;
     const schoolData = await prisma.dadosEscolares.findFirst({
       where: {
         idParticipante: Number(idParticipant),

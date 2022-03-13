@@ -36,10 +36,7 @@ export const Participants = {
       where: {
         id: Number(participantUpdated.id),
       },
-      data: {
-        ...participantUpdated,
-        dtNascimento: null,
-      },
+      data: participantUpdated,
     });
     if (participant) {
       return res.json(participant);

@@ -12,7 +12,7 @@ export const Health = {
     return res.json(healthCreated);
   },
   find: async (req: Request, res: Response) => {
-    const id = req.params;
+    const {id} = req.params;
     const health = await prisma.saude.findFirst({
       where: {
         idParticipante: Number(id),

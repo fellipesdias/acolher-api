@@ -12,7 +12,7 @@ export const FamilyData = {
     return res.json(familyDataCreated);
   },
   find: async (req: Request, res: Response) => {
-    const idParticipant = req.params;
+    const { idParticipant } = req.params;
     const familyData = await prisma.dadosFamiliares.findFirst({
       where: {
         idParticipante: Number(idParticipant),
