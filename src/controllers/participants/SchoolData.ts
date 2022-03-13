@@ -30,9 +30,10 @@ export const SchoolData = {
   },
   update: async (req: Request, res: Response) => {
     const schoolData = req.body as dadosEscolares;
+    console.log(schoolData)
     await prisma.dadosEscolares.update({
       where: {
-        id: schoolData.id,
+        id: Number(schoolData.id),
       },
       data: schoolData,
     });
