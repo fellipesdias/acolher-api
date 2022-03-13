@@ -61,7 +61,7 @@ exports.SchoolData = {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    idParticipant = req.params;
+                    idParticipant = req.params.idParticipant;
                     return [4 /*yield*/, server_1.prismaClient.dadosEscolares.findFirst({
                             where: {
                                 idParticipante: Number(idParticipant),
@@ -84,9 +84,10 @@ exports.SchoolData = {
             switch (_a.label) {
                 case 0:
                     schoolData = req.body;
+                    console.log(schoolData);
                     return [4 /*yield*/, server_1.prismaClient.dadosEscolares.update({
                             where: {
-                                id: schoolData.id,
+                                id: Number(schoolData.id),
                             },
                             data: schoolData,
                         })];

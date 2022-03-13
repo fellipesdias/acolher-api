@@ -73,20 +73,21 @@ exports.Contacts = {
         });
     }); },
     update: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var contact, contactUpdated;
+        var contact;
         return __generator(this, function (_a) {
-            contact = req.body;
-            contactUpdated = server_1.prismaClient.contatos.update({
-                where: {
-                    id: contact.id,
-                },
-                data: {
-                    Celular: contact.Celular,
-                    Email: contact.Email,
-                    TelefoneFixo: contact.TelefoneFixo,
-                },
-            });
-            return [2 /*return*/, res.json(contactUpdated)];
+            switch (_a.label) {
+                case 0:
+                    contact = req.body;
+                    return [4 /*yield*/, server_1.prismaClient.contatos.update({
+                            where: {
+                                id: contact.id,
+                            },
+                            data: contact,
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, res.status(204)];
+            }
         });
     }); },
     delete: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {

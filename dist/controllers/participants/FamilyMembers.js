@@ -59,7 +59,7 @@ exports.FamilyMembers = {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    id = req.params;
+                    id = req.params.id;
                     return [4 /*yield*/, server_1.prismaClient.familiares.findMany({
                             where: {
                                 idParticipante: Number(id),

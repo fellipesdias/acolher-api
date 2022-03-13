@@ -102,7 +102,7 @@ exports.Participants = {
                 case 1:
                     participant = _a.sent();
                     if (participant) {
-                        return [2 /*return*/, res.status(204)];
+                        return [2 /*return*/, res.json(participant)];
                     }
                     return [2 /*return*/, res.status(404).json({ message: "participante não encontrado" })];
             }

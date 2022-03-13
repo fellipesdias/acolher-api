@@ -54,7 +54,6 @@ exports.AuthController = {
                         })];
                 case 1:
                     user = _b.sent();
-                    server_1.prismaClient.$disconnect();
                     if (user) {
                         return [2 /*return*/, res.json(user)];
                     }
@@ -72,6 +71,7 @@ exports.AuthController = {
             switch (_b.label) {
                 case 0:
                     _a = req.body, usuario = _a.usuario, senha = _a.senha;
+                    console.log(req.body);
                     return [4 /*yield*/, server_1.prismaClient.usuarios.findFirst({
                             where: {
                                 usuario: usuario,

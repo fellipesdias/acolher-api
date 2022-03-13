@@ -59,7 +59,7 @@ exports.FamilyData = {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    idParticipant = req.params;
+                    idParticipant = req.params.idParticipant;
                     return [4 /*yield*/, server_1.prismaClient.dadosFamiliares.findFirst({
                             where: {
                                 idParticipante: Number(idParticipant),

@@ -44,6 +44,7 @@ var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var AuthController_1 = require("./controllers/AuthController");
 var Participants_1 = require("./controllers/participants/Participants");
+var Address_1 = require("./controllers/participants/Address");
 var Contacts_1 = require("./controllers/participants/Contacts");
 var FamilyData_1 = require("./controllers/participants/FamilyData");
 var FamilyMembers_1 = require("./controllers/participants/FamilyMembers");
@@ -60,19 +61,11 @@ server.get("/", function (req, res) {
     res.send("The server is up");
 });
 server.post("/login", function (req, res) {
-    return AuthController_1.AuthController.login(req, res).then(function (response) { return response.send(); });
+    return AuthController_1.AuthController.login(req, res).then(function (response) { return response; });
 });
-server.post("/signup", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var response;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, AuthController_1.AuthController.signup(req, res)];
-            case 1:
-                response = _a.sent();
-                return [2 /*return*/, response.send()];
-        }
-    });
-}); });
+server.post("/signup", function (req, res) {
+    return AuthController_1.AuthController.signup(req, res).then(function (response) { return response; });
+});
 /**partner crud */
 server.post("/participant", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var response;
@@ -81,7 +74,7 @@ server.post("/participant", function (req, res) { return __awaiter(void 0, void 
             case 0: return [4 /*yield*/, Participants_1.Participants.create(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -103,7 +96,7 @@ server.get("/participant/:id", function (req, res) { return __awaiter(void 0, vo
             case 0: return [4 /*yield*/, Participants_1.Participants.find(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -114,7 +107,7 @@ server.put("/participant", function (req, res) { return __awaiter(void 0, void 0
             case 0: return [4 /*yield*/, Participants_1.Participants.update(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -125,7 +118,7 @@ server.delete("/participant/:id", function (req, res) { return __awaiter(void 0,
             case 0: return [4 /*yield*/, Participants_1.Participants.delete(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -137,7 +130,7 @@ server.get("/contact/:participantId", function (req, res) { return __awaiter(voi
             case 0: return [4 /*yield*/, Contacts_1.Contacts.find(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -148,7 +141,7 @@ server.post("/contact", function (req, res) { return __awaiter(void 0, void 0, v
             case 0: return [4 /*yield*/, Contacts_1.Contacts.create(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -159,7 +152,7 @@ server.put("/contact", function (req, res) { return __awaiter(void 0, void 0, vo
             case 0: return [4 /*yield*/, Contacts_1.Contacts.update(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -170,7 +163,7 @@ server.delete("/contact/:id", function (req, res) { return __awaiter(void 0, voi
             case 0: return [4 /*yield*/, Contacts_1.Contacts.delete(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -182,7 +175,7 @@ server.post("/familyData", function (req, res) { return __awaiter(void 0, void 0
             case 0: return [4 /*yield*/, FamilyData_1.FamilyData.create(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -193,7 +186,7 @@ server.put("/familyData", function (req, res) { return __awaiter(void 0, void 0,
             case 0: return [4 /*yield*/, FamilyData_1.FamilyData.update(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -204,7 +197,7 @@ server.get("/familyData/:idParticipant", function (req, res) { return __awaiter(
             case 0: return [4 /*yield*/, FamilyData_1.FamilyData.find(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -215,7 +208,7 @@ server.delete("/familyData/:id", function (req, res) { return __awaiter(void 0, 
             case 0: return [4 /*yield*/, FamilyData_1.FamilyData.delete(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -227,7 +220,7 @@ server.post("/familyMembers", function (req, res) { return __awaiter(void 0, voi
             case 0: return [4 /*yield*/, FamilyMembers_1.FamilyMembers.create(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -238,7 +231,7 @@ server.put("/familyMembers", function (req, res) { return __awaiter(void 0, void
             case 0: return [4 /*yield*/, FamilyMembers_1.FamilyMembers.update(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -249,7 +242,7 @@ server.get("/familyMembers/:idParticipant", function (req, res) { return __await
             case 0: return [4 /*yield*/, FamilyMembers_1.FamilyMembers.findAll(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -260,7 +253,7 @@ server.delete("/familyMembers/:id", function (req, res) { return __awaiter(void 
             case 0: return [4 /*yield*/, FamilyMembers_1.FamilyMembers.delete(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -272,7 +265,7 @@ server.post("/health", function (req, res) { return __awaiter(void 0, void 0, vo
             case 0: return [4 /*yield*/, Health_1.Health.create(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -283,7 +276,7 @@ server.put("/health", function (req, res) { return __awaiter(void 0, void 0, voi
             case 0: return [4 /*yield*/, Health_1.Health.update(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -294,7 +287,7 @@ server.get("/health/:idParticipant", function (req, res) { return __awaiter(void
             case 0: return [4 /*yield*/, Health_1.Health.find(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -305,7 +298,7 @@ server.delete("/health/:id", function (req, res) { return __awaiter(void 0, void
             case 0: return [4 /*yield*/, Health_1.Health.delete(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -317,7 +310,7 @@ server.post("/schoolData", function (req, res) { return __awaiter(void 0, void 0
             case 0: return [4 /*yield*/, SchoolData_1.SchoolData.create(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -328,7 +321,7 @@ server.put("/schoolData", function (req, res) { return __awaiter(void 0, void 0,
             case 0: return [4 /*yield*/, SchoolData_1.SchoolData.update(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -339,7 +332,7 @@ server.get("/schoolData/:idParticipant", function (req, res) { return __awaiter(
             case 0: return [4 /*yield*/, SchoolData_1.SchoolData.find(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
         }
     });
 }); });
@@ -350,7 +343,54 @@ server.delete("/schoolData/:id", function (req, res) { return __awaiter(void 0, 
             case 0: return [4 /*yield*/, SchoolData_1.SchoolData.delete(req, res)];
             case 1:
                 response = _a.sent();
-                return [2 /*return*/, response.send()];
+                return [2 /*return*/, response];
+        }
+    });
+}); });
+/** Endereço **/
+server.post("/address", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var response;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                console.log(req);
+                return [4 /*yield*/, Address_1.Address.create(req, res)];
+            case 1:
+                response = _a.sent();
+                return [2 /*return*/, response];
+        }
+    });
+}); });
+server.put("/address", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var response;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Address_1.Address.update(req, res)];
+            case 1:
+                response = _a.sent();
+                return [2 /*return*/, response];
+        }
+    });
+}); });
+server.get("/address/:idParticipant", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var response;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Address_1.Address.find(req, res)];
+            case 1:
+                response = _a.sent();
+                return [2 /*return*/, response];
+        }
+    });
+}); });
+server.delete("/address/:id", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var response;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Address_1.Address.delete(req, res)];
+            case 1:
+                response = _a.sent();
+                return [2 /*return*/, response];
         }
     });
 }); });

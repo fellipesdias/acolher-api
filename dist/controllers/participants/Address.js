@@ -40,13 +40,16 @@ exports.Address = void 0;
 var server_1 = require("../../server");
 exports.Address = {
     create: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var address, addressCreated;
+        var data, addressCreated;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    address = req.body;
+                    data = req.body;
+                    if (!data.idParticipante) {
+                        return [2 /*return*/, res.status(400)];
+                    }
                     return [4 /*yield*/, server_1.prismaClient.endereco.create({
-                            data: address,
+                            data: data,
                         })];
                 case 1:
                     addressCreated = _a.sent();
@@ -55,22 +58,22 @@ exports.Address = {
         });
     }); },
     find: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var id, address;
+        var idParticipant, addresses;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    id = req.params;
-                    return [4 /*yield*/, server_1.prismaClient.endereco.findUnique({
+                    idParticipant = req.params.idParticipant;
+                    return [4 /*yield*/, server_1.prismaClient.endereco.findMany({
                             where: {
-                                id: Number(id),
+                                idParticipante: Number(idParticipant),
                             },
                         })];
                 case 1:
-                    address = _a.sent();
-                    if (address) {
-                        return [2 /*return*/, res.json(address)];
+                    addresses = _a.sent();
+                    if (addresses) {
+                        return [2 /*return*/, res.json(addresses)];
                     }
-                    return [2 /*return*/, res.json({ message: "Nenhum dado familiar foi encontrado." })];
+                    return [2 /*return*/, res.json({ message: "Nenhum endereço foi encontrado." })];
             }
         });
     }); },
