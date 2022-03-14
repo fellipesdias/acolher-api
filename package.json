@@ -48,5 +48,8 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "engines": {
+    "node": "16.14.0"
+  }
 }
